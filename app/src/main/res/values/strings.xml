@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">canivete-suico</string>
+    <string name="open_camera">Abrir câmera</string>
+    <string name="photos">Ver fotos</string>
+    <string name="camera">Câmera</string>
+    <string name="compass">Bússola</string>
+    <string name="level">Nível</string>
+
 </resources>
