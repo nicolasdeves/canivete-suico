@@ -1,6 +1,7 @@
 package com.nicolas.canivete_suico;
 
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private Button cameraButton, compassButton, levelButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +31,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        compassButton = findViewById(R.id.compass_button);
+        compassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CompassActivity.class);
+                startActivity(intent);
+            }
+        });
+        levelButton = findViewById(R.id.level_button);
+        levelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LevelActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
