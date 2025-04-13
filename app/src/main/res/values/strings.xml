@@ -5,5 +5,6 @@
     <string name="camera">Câmera</string>
     <string name="compass">Bússola</string>
     <string name="level">Nível</string>
-
+    <string name="descricao_bussola">Imagem de uma bússola</string>
+    <string name="descricao_level">Imagem tranparente</string>
 </resources>
