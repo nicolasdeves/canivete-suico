@@ -15,17 +15,17 @@ public class PicturesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contacts);
+        setContentView(R.layout.pictures_recycler);
 
         databaseManager = new DatabaseManager(this);
-        List<Picture> contacts = databaseManager.getAllPictures();
+        List<Picture> pictures = databaseManager.getAllPictures();
 
         recyclerView = findViewById(R.id.pictures_recycler);
-        PictureAdapter adapter = new PictureAdapter(contacts, databaseManager);
+        PictureAdapter adapter = new PictureAdapter(pictures, databaseManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         databaseManager = new DatabaseManager(this);
     }
 }
-}
+

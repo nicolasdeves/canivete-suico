@@ -29,10 +29,20 @@
         android:id="@+id/photo_preview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="91dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_photos_button"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/delete_all_pictures_button"
+        android:layout_width="147dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/delete_all"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

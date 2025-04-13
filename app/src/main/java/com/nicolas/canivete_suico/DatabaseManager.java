@@ -5,8 +5,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DatabaseManager extends SQLiteOpenHelper {
 
@@ -37,11 +40,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public void insertPicture(Picture picture) {
         String base64 = picture.getBase64();
-        String date = picture.getDate();
+        String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
 
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO " + TABLE_NAME + " (base64, date) VALUES (?, ?)";
-        db.execSQL(sql, new Object[]{base64, base64});
+        db.execSQL(sql, new Object[]{base64, date});
         db.close();
     }
 
@@ -49,7 +52,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         List<Picture> lista = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT name, number FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT base64, date FROM " + TABLE_NAME, null);
 
         if (cursor.moveToFirst()) {
             do {

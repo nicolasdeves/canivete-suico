@@ -1,8 +1,13 @@
 package com.nicolas.canivete_suico;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,50 +28,39 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.PictureV
     @Override
     public PictureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.contact, parent, false);
+                .inflate(R.layout.item_picture, parent, false);
         return new PictureViewHolder(itemView);
 
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull PictureAdapter.PictureViewHolder holder, int position) {
-//
-//    }
-
-
     @Override
     public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
-        Contact contact = contacts.get(position);
-        holder.nameText.setText(contact.getName());
-        holder.phoneText.setText(contact.getPhone());
+        Picture picture = pictures.get(position);
+        holder.dateText.setText(picture.getDate());
 
-        holder.deleteButton.setOnClickListener(v -> {
-
-            Contact contactToRemove = contacts.get(position);
-            databaseManager.deleteContactByName(contactToRemove.getName());
-
-            contacts.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, contacts.size());
-        });
+        Bitmap imageBitmap = decodeBase64ToBitmap(picture.getBase64());
+        holder.imageView.setImageBitmap(imageBitmap);
     }
 
     @Override
     public int getItemCount() {
-        return contacts.size();
+        return pictures.size();
+    }
+
+    private Bitmap decodeBase64ToBitmap(String base64) {
+        byte[] decodedBytes = Base64.decode(base64, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
     public static class PictureViewHolder extends RecyclerView.ViewHolder {
-        TextView nameText;
-        TextView phoneText;
-        Button deleteButton;
+        TextView dateText;
+        ImageView imageView;
         DatabaseManager databaseManager;
 
         public PictureViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameText = itemView.findViewById(R.id.textView);
-            phoneText = itemView.findViewById(R.id.editTextPhone);
-            deleteButton = itemView.findViewById(R.id.delete_button);
+            dateText = itemView.findViewById(R.id.picture_date_text_view);
+            imageView = itemView.findViewById(R.id.picture_image_view);
         }
     }
 }

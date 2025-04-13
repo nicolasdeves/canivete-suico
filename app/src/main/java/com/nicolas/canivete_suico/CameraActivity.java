@@ -20,12 +20,14 @@ import java.io.ByteArrayOutputStream;
 
 
 public class CameraActivity extends AppCompatActivity {
-    Button openCameraButton, viewPhotosButton;
+    Button openCameraButton, viewPhotosButton, deleteAllPicturesButton;
     ImageView photoPreview;
 
     String base64Image = "";
 
     ActivityResultLauncher<Intent> cameraLauncher;
+
+    DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +43,17 @@ public class CameraActivity extends AppCompatActivity {
                         Bitmap photo = (Bitmap) result.getData().getExtras().get("data");
                         photoPreview.setImageBitmap(photo);
                         base64Image = encodeImageToBase64(photo);
+
+                        Picture picture = new Picture(base64Image);
+                        databaseManager.insertPicture(picture);
+
                         Toast.makeText(this, "Imagem salva em Base64!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     public void initComponents() {
-        viewPhotosButton = findViewById(R.id.view_photos_button);
+        databaseManager = new DatabaseManager(this);
 
         photoPreview = findViewById(R.id.photo_preview);
 
@@ -62,6 +68,23 @@ public class CameraActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+            }
+        });
+
+        viewPhotosButton = findViewById(R.id.view_photos_button);
+        viewPhotosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent picturesIntent = new Intent(CameraActivity.this, PicturesActivity.class);
+                startActivity(picturesIntent);
+            }
+        });
+
+        deleteAllPicturesButton = findViewById(R.id.delete_all_pictures_button);
+        deleteAllPicturesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseManager.cleanData();
             }
         });
     }

@@ -9,32 +9,44 @@
 
     <Button
         android:id="@+id/view_photos_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="165dp"
-        android:layout_marginTop="193dp"
+        android:layout_width="105dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="144dp"
         android:text="@string/camera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/compass_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="78dp"
+        android:layout_width="104dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="88dp"
         android:text="@string/compass"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_photos_button" />
 
     <Button
         android:id="@+id/level_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="105dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="112dp"
         android:text="@string/level"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/compass_button" />
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
